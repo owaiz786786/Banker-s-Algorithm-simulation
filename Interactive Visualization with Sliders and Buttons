@@ -1,0 +1,36 @@
+import dash
+from dash import dcc, html
+import plotly.graph_objects as go
+
+# Sample data
+allocation = [2, 3, 2]
+available = [3, 1, 2]
+
+# Initialize Dash App
+app = dash.Dash(__name__)
+
+app.layout = html.Div([
+    dcc.Slider(
+        id='slider',
+        min=0,
+        max=3,
+        step=1,
+        value=1,
+        marks={0: '0', 1: '1', 2: '2', 3: '3'},
+    ),
+    dcc.Graph(id='resource-graph')
+])
+
+@app.callback(
+    dash.dependencies.Output('resource-graph', 'figure'),
+    [dash.dependencies.Input('slider', 'value')]
+)
+def update_graph(slider_value):
+    allocation[0] = slider_value
+    fig = go.Figure()
+    fig.add_trace(go.Bar(x=['R1', 'R2', 'R3'], y=allocation, name='Allocated'))
+    fig.update_layout(title="Resource Allocation")
+    return fig
+
+if __name__ == '__main__':
+    app.run_server(debug=True)

@@ -1,0 +1,10 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Simulating resource usage
+data = np.random.rand(5, 3)  # 5 processes, 3 resources
+sns.heatmap(data, annot=True, cmap="YlGnBu", xticklabels=["R1", "R2", "R3"], yticklabels=["P0", "P1", "P2", "P3", "P4"])
+
+plt.title("Heatmap of Resource Utilization")
+plt.show()

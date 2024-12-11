@@ -1,0 +1,16 @@
+import plotly.express as px
+
+# Sample Gantt data for processes
+tasks = [
+    {'Task': 'P0', 'Start': '2024-12-01', 'Finish': '2024-12-02', 'Resource': 'R1'},
+    {'Task': 'P1', 'Start': '2024-12-01', 'Finish': '2024-12-03', 'Resource': 'R2'},
+    {'Task': 'P2', 'Start': '2024-12-02', 'Finish': '2024-12-04', 'Resource': 'R3'},
+]
+
+# Convert to DataFrame
+df_tasks = pd.DataFrame(tasks)
+
+# Plot the Gantt chart
+fig = px.timeline(df_tasks, x_start="Start", x_end="Finish", y="Task", color="Resource")
+fig.update_layout(title="Gantt Chart for Resource Allocation Over Time")
+fig.show()
